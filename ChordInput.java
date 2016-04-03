@@ -8,6 +8,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * Used to combine multiple input events (multiple keys being pressed) into a
+ * single keystroke.
+ *
+ * Called ChordInput by analogy to a musical instrument; multiple voices
+ * create a single sound.
+ */
 public class ChordInput {
   public static final int L1 = KeyEvent.VK_F;
   public static final int L2 = KeyEvent.VK_D;
@@ -27,8 +34,6 @@ public class ChordInput {
 
     addToMapping(mapping, KeyEvent.VK_PERIOD, '.', R3, R4, L3);
 
-    // In decreasing order by letter frequency
-    // https://en.wikipedia.org/wiki/Letter_frequency
     addToMapping(mapping, KeyEvent.VK_E, 'e', R1);
     addToMapping(mapping, KeyEvent.VK_T, 't', L1);
     addToMapping(mapping, KeyEvent.VK_A, 'a', R2);
