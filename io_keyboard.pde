@@ -4,9 +4,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 
+int DELAY = 3_000;
+
 String goal = "";
 String text = "";
 
+int lastChordMillis = 0;
 List<String> practiceWords;
 Random random = new Random();
 
@@ -14,6 +17,7 @@ ChordInput chordInput = new ChordInput(new BiConsumer<Integer, Character>() {
   public void accept(Integer keyCode, Character keyChar) {
     if (keyChar > 0) {
       text += keyChar;
+      lastChordMillis = millis();
     } else {
       switch ((int)keyCode) {
         case BACKSPACE:
@@ -32,6 +36,8 @@ void settings() {
 }
 
 void setup() {
+  surface.setResizable(true);
+
   HashSet practiceChars = new HashSet();
   practiceChars.add('a');
   practiceChars.add('e');
@@ -66,7 +72,9 @@ void draw() {
 
   int i = 0;
   while (i < goal.length() && i < text.length() && goal.charAt(i) == text.charAt(i)) i++;
-  drawKey(goal.charAt(i));
+  if (millis() - lastChordMillis > DELAY) {
+    drawKey(goal.charAt(i));
+  }
 }
 
 void drawKey(char keyChar) {
@@ -79,12 +87,12 @@ void drawKey(char keyChar) {
       fill(0);
     }
     ellipseMode(CENTER);
-    ellipse(width * (i + 1f) / 9, height / 2, width / 18, width / 18);
+    ellipse(width * (i + (i < 4 ? 1f : 2f)) / 10, height / 2, width / 20, width / 20);
   }
   fill(0, 255, 0);
   textAlign(CENTER);
   textSize(26);
-  text("\"" + keyChar + "\"", width / 18, height / 2);
+  text("\"" + keyChar + "\"", width / 20, height / 2);
 }
 
 void keyPressed() {
