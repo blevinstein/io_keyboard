@@ -74,12 +74,7 @@ void draw() {
   int i = 0;
   while (i < goal.length() && i < text.length() && goal.charAt(i) == text.charAt(i)) i++;
   if (millis() - lastChordMillis > DELAY) {
-    char keyChar = goal.charAt(i);
-    fill(0, 255, 0);
-    textAlign(CENTER);
-    textSize(26);
-    text("\"" + keyChar + "\"", width / 20, height / 2);
-    drawKey(keyChar);
+    drawKey(goal.charAt(i));
   }
 }
 
