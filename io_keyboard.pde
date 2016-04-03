@@ -42,8 +42,8 @@ void setup() {
   practiceChars.add('n');
   practiceChars.add('s');
   try {
-    practiceWords = Words.getPracticeWords(practiceChars);
-    //practiceWords = Words.getAllWords();
+    //practiceWords = Words.getPracticeWords(practiceChars);
+    practiceWords = Words.getAllWords();
   } catch (FileNotFoundException e) {
     throw new RuntimeException(e);
   }
