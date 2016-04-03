@@ -38,13 +38,13 @@ TODO: Make the numbers look morel like binary?
 
 Excluding L4 as a modifier, we have the following:
 
-> 1-finger codes (7)
-> 2-finger codes (7 choose 2 = 21)
-> 3-finger codes (7 choose 3 = 35)
-> *** Unreliable past this point
-> 4-finger codes (7 choose 4 = 35)
-> 5-finger codes (7 choose 5 = 21)
-> 6-finger codes (7 choose 6 = 7)
+    1-finger codes (7)
+    2-finger codes (7 choose 2 = 21)
+    3-finger codes (7 choose 3 = 35)
+    *** Unreliable past this point
+    4-finger codes (7 choose 4 = 35)
+    5-finger codes (7 choose 5 = 21)
+    6-finger codes (7 choose 6 = 7)
 
 *** Awkward limitation: when you try to press more than 3 keys at a time on a
 normal keyboard, you may not get accurate key events. So codes requiring more
@@ -54,7 +54,7 @@ So, we have 7 + 21 + 35 = 63 usable encodings
 
     26 letters
     10 digits
-    
+
     e = R1           [ ]  [ ][ ][ ]    [X][ ][ ][ ]
     t = L1           [ ]  [ ][ ][X]    [ ][ ][ ][ ]
     a = R2           [ ]  [ ][ ][ ]    [ ][X][ ][ ]
@@ -81,9 +81,9 @@ So, we have 7 + 21 + 35 = 63 usable encodings
     x = R4 L2        [ ]  [ ][X][ ]    [ ][ ][ ][X]
     q = R3 L3        [ ]  [X][ ][ ]    [ ][ ][X][ ]
     z = R4 L3        [ ]  [X][ ][ ]    [ ][ ][ ][X]
-    
+
     (for upper case, add left pinky L4)
-    
+
     0 = R2 R4        [ ]  [ ][ ][ ]    [ ][X][ ][X]
     1 = R1 R2 R3     [ ]  [ ][ ][ ]    [X][X][X][ ]
     2 = L1 L2 L3     [ ]  [X][X][X]    [ ][ ][ ][ ]
@@ -94,12 +94,12 @@ So, we have 7 + 21 + 35 = 63 usable encodings
     7 = R1 R3 L1     [ ]  [ ][ ][X]    [X][ ][X][ ]
     8 = R2 L2 L3     [ ]  [X][X][ ]    [ ][X][ ][ ]
     9 = R2 R3 L2     [ ]  [ ][X][ ]    [ ][X][X][ ]
-    
+
     TODO: Add modifier + numbers => symbols
-    
+
     space = R1 L1    [ ]  [ ][ ][X]    [X][ ][ ][ ]
     .     = R3 R4 L3 [ ]  [X][ ][ ]    [ ][ ][X][X]
-    
+
     TODO: add more punctuation
 
 Backspace/delete works normally
