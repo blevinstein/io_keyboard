@@ -27,11 +27,13 @@ public class ChordInput {
 
   public static final char NONE = (char) 0;
 
+  /**
+   * Constructs the mapping between key combinations and output events.
+   */
   public static Map<Set<Integer>, Pair<Integer, Character>> buildMapping() {
     HashMap<Set<Integer>, Pair<Integer, Character>> mapping = new HashMap<>();
 
     addToMapping(mapping, KeyEvent.VK_SPACE, ' ', R1, L1);
-
     addToMapping(mapping, KeyEvent.VK_PERIOD, '.', R3, R4, L3);
 
     addToMapping(mapping, KeyEvent.VK_E, 'e', R1);
@@ -105,6 +107,11 @@ public class ChordInput {
     return mapping;
   }
 
+  /**
+   * Helper method for adding a mapping.
+   * When the user presses the key combination described by [keyCodes], then the ChordInput will
+   * emit character [keyChar] with code [keyCode].
+   */
   private static void addToMapping(
       HashMap<Set<Integer>, Pair<Integer, Character>> mapping,
       int keyCode,
@@ -121,9 +128,13 @@ public class ChordInput {
   }
 
   private Map<Set<Integer>, Pair<Integer, Character>> mapping;
+  // When a keystroke is successfully emitted, [callback] will be called with [keyCode] and
+  // [keyChar] as arguments.
   private BiConsumer<Integer, Character> callback;
 
+  // Stores all the keys that are currently pressed.
   private HashSet<Integer> pressedKeys = new HashSet<>();
+  // Stores all the keys that have been pressed since this combination was started.
   private HashSet<Integer> chordKeys = new HashSet<>();
 
   public ChordInput(BiConsumer<Integer, Character> callback) {
@@ -131,7 +142,7 @@ public class ChordInput {
     this.callback = callback;
   }
 
-  // Returns list of [L4, L3, L2, L1, R1, R2, R3, R4] states
+  // Returns list of [L4, L3, L2, L1, R1, R2, R3, R4] which can be used to emit [keyChar]
   public List<Boolean> reverseLookup(char keyChar) {
     for (Map.Entry<Set<Integer>, Pair<Integer, Character>> entry : mapping.entrySet()) {
       if (entry.getValue().getSecond() == keyChar) {
