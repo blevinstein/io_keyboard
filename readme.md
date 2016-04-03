@@ -45,6 +45,7 @@ Excluding L4 as a modifier, we have the following:
     4-finger codes (7 choose 4 = 35)
     5-finger codes (7 choose 5 = 21)
     6-finger codes (7 choose 6 = 7)
+    7-finger codes (1)
 
 *** Awkward limitation: when you try to press more than 3 keys at a time on a
 normal keyboard, you may not get accurate key events. So codes requiring more
@@ -54,6 +55,9 @@ So, we have 7 + 21 + 35 = 63 usable encodings
 
     26 letters
     10 digits
+    2 other
+
+    25 unassigned, all are 3-finger codes
 
     e = R1           [ ]  [ ][ ][ ]    [X][ ][ ][ ]
     t = L1           [ ]  [ ][ ][X]    [ ][ ][ ][ ]
