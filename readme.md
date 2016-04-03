@@ -114,3 +114,6 @@ So, we have 7 + 21 + 35 = 63 usable encodings
 Backspace/delete works normally
 TODO: reassign to a 3-finger code
 
+Press H to get help (see how to type the next character)
+Press N to pick a new word
+
