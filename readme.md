@@ -1,6 +1,9 @@
 IO Keyboard
 ===========
 
+NOTE: This program is written for processing 3. http://processing.org
+You must download processing to run this POC.
+
 From left to right, your fingers:
 
 - L4 (left pinky)
