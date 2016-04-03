@@ -156,9 +156,10 @@ public class ChordInput {
         Pair<Integer, Character> output = mapping.get(chordKeys);
         callback.accept(output.getFirst(), output.getSecond());
       } else {
-        System.out.println(String.format("Unrecognized chord: %s", chordKeys));
+        System.err.println(String.format("Unrecognized chord: %s", chordKeys));
       }
       chordKeys.clear();
     }
   }
 }
+
