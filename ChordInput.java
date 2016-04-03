@@ -27,6 +27,8 @@ public class ChordInput {
 
     addToMapping(mapping, KeyEvent.VK_PERIOD, '.', R3, R4, L3);
 
+    // In decreasing order by letter frequency
+    // https://en.wikipedia.org/wiki/Letter_frequency
     addToMapping(mapping, KeyEvent.VK_E, 'e', R1);
     addToMapping(mapping, KeyEvent.VK_T, 't', L1);
     addToMapping(mapping, KeyEvent.VK_A, 'a', R2);
@@ -162,4 +164,3 @@ public class ChordInput {
     }
   }
 }
-
