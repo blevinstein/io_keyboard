@@ -1,20 +1,25 @@
+import java.io.FileNotFoundException;
 import java.util.function.BiConsumer;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Random;
 
-String buffer = "";
-char lastChar = ' ';
+String goal = "";
+String text = "";
+
+List<String> practiceWords;
+Random random = new Random();
 
 ChordInput chordInput = new ChordInput(new BiConsumer<Integer, Character>() {
   public void accept(Integer keyCode, Character keyChar) {
     if (keyChar > 0) {
-      buffer += keyChar;
-      lastChar = keyChar;
+      text += keyChar;
     } else {
       switch ((int)keyCode) {
         case BACKSPACE:
         case DELETE:
-          if (buffer.length() > 0) {
-            buffer = buffer.substring(0, buffer.length() - 1);
+          if (text.length() > 0) {
+            text = text.substring(0, text.length() - 1);
           }
           break;
       }
@@ -26,15 +31,42 @@ void settings() {
   size(640, 480);
 }
 
+void setup() {
+  HashSet practiceChars = new HashSet();
+  practiceChars.add('a');
+  practiceChars.add('e');
+  practiceChars.add('i');
+  practiceChars.add('o');
+  practiceChars.add('u');
+  practiceChars.add('t');
+  practiceChars.add('n');
+  practiceChars.add('s');
+  try {
+    practiceWords = Words.getPracticeWords(practiceChars);
+    //practiceWords = Words.getAllWords();
+  } catch (FileNotFoundException e) {
+    throw new RuntimeException(e);
+  }
+}
+
 void draw() {
+  if (text.equals(goal)) {
+    goal = practiceWords.get(random.nextInt(practiceWords.size()));
+    text = "";
+  }
+
   noStroke();
   fill(0);
   rect(0, 0, width, height);
   fill(255);
   textAlign(LEFT);
-  textSize(12);
-  text(buffer, 0, 15);
-  drawKey(lastChar);
+  textSize(20);
+  text(goal, 0, 15);
+  text(text, 0, 30);
+
+  int i = 0;
+  while (i < goal.length() && i < text.length() && goal.charAt(i) == text.charAt(i)) i++;
+  drawKey(goal.charAt(i));
 }
 
 void drawKey(char keyChar) {
