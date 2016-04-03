@@ -4,7 +4,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 
-int DELAY = 3_000;
+int DELAY = 1_500;
+
 
 String goal = "";
 String text = "";
@@ -68,12 +69,17 @@ void draw() {
   textAlign(LEFT);
   textSize(20);
   text(goal, 0, 15);
-  text(text, 0, 30);
+  text(text, 0, 35);
 
   int i = 0;
   while (i < goal.length() && i < text.length() && goal.charAt(i) == text.charAt(i)) i++;
   if (millis() - lastChordMillis > DELAY) {
-    drawKey(goal.charAt(i));
+    char keyChar = goal.charAt(i);
+    fill(0, 255, 0);
+    textAlign(CENTER);
+    textSize(26);
+    text("\"" + keyChar + "\"", width / 20, height / 2);
+    drawKey(keyChar);
   }
 }
 
@@ -89,10 +95,6 @@ void drawKey(char keyChar) {
     ellipseMode(CENTER);
     ellipse(width * (i + (i < 4 ? 1f : 2f)) / 10, height / 2, width / 20, width / 20);
   }
-  fill(0, 255, 0);
-  textAlign(CENTER);
-  textSize(26);
-  text("\"" + keyChar + "\"", width / 20, height / 2);
 }
 
 void keyPressed() {
