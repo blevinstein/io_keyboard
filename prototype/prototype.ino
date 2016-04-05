@@ -21,11 +21,13 @@ void setup() {
 
 void keyPressed(int i) {
   state[i] = true;
+  setBuzzer(i, HIGH);
   chordKeyPressed(chordInput, i);
 }
 
 void keyReleased(int i) {
   state[i] = false;
+  setBuzzer(i, LOW);
   chordKeyReleased(chordInput, i);
 }
 
