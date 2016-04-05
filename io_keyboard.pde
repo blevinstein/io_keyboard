@@ -77,22 +77,9 @@ void setup() {
     rightHandLetters.add('c');
     rightHandLetters.add('w');
     rightHandLetters.add('m');
-    HashSet bothHandLetters = new HashSet();
-    bothHandLetters.add('f');
-    bothHandLetters.add('g');
-    bothHandLetters.add('y');
-    bothHandLetters.add('p');
-    bothHandLetters.add('b');
-    bothHandLetters.add('v');
-    bothHandLetters.add('k');
-    bothHandLetters.add('j');
-    bothHandLetters.add('x');
-    bothHandLetters.add('q');
-    bothHandLetters.add('z');
-    practiceWords = Words.getPracticeWords(bothHandLetters);
     //practiceWords = Words.getPracticeWords(rightHandLetters);
     //practiceWords = Words.getPracticeWords(leftHandLetters);
-    //practiceWords = Words.getAllWords();
+    practiceWords = Words.getAllWords();
   } catch (FileNotFoundException e) {
     throw new RuntimeException(e);
   }
@@ -121,7 +108,7 @@ void draw() {
   textAlign(LEFT);
   textSize(20);
   text(goal, 0, 15);
-  text(text, 0, 35);
+  text(text + "_", 0, 35);
 
   int i = 0;
   while (i < goal.length() && i < text.length() && goal.charAt(i) == text.charAt(i)) i++;

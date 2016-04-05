@@ -39,7 +39,7 @@ letters (lower and upper case), numbers, and some amount of punctuation.
 However, I made some *very* questionable decisions that could be improved. In
 particular, it would be easier to remember the numbers if the sequence 0-9 had a
 recognizable pattern or sequence, but it looks basically arbitrary to me.
-TODO: Make the numbers look morel like binary?
+TODO: Make the numbers look more like binary?
 
 Excluding L4 as a modifier, we have the following:
 
@@ -56,13 +56,13 @@ Excluding L4 as a modifier, we have the following:
 normal keyboard, you may not get accurate key events. So codes requiring more
 than 3 fingers may not work, in this POC.
 
-So, we have 7 + 21 + 35 = 63 usable encodings
+So, we have 7 + 21 + 35 = 63 encodings using 3 fingers or less
 
     26 letters
     10 digits
     2 other
 
-    25 unassigned, all are 3-finger codes
+    25 unassigned 3-finger codes
 
     e = R1           [ ]  [ ][ ][ ]    [X][ ][ ][ ]
     t = L1           [ ]  [ ][ ][X]    [ ][ ][ ][ ]
@@ -106,13 +106,14 @@ So, we have 7 + 21 + 35 = 63 usable encodings
 
     TODO: Add modifier + numbers => symbols
 
-    space = R1 L1    [ ]  [ ][ ][X]    [X][ ][ ][ ]
-    .     = R3 R4 L3 [ ]  [X][ ][ ]    [ ][ ][X][X]
+    space = R1 L1           [ ]  [ ][ ][X]    [X][ ][ ][ ]
+    .     = R3 R4 L3        [ ]  [X][ ][ ]    [ ][ ][X][X]
+
+    NOTE: To make codes with 4+ fingers work on a normal keyboard, try "galloping".
+    newline   = R1 R2 R3 R4 [ ]  [ ][ ][ ]    [X][X][X][X]
+    backspace = R1 R2 R3 L1 [ ]  [ ][ ][X]    [X][X][X][ ]
 
     TODO: add more punctuation
-
-Backspace/delete works normally
-TODO: reassign to a 3-finger code
 
 Press H to get help (see how to type the next character)
 Press N to pick a new word

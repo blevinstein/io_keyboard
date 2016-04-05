@@ -36,6 +36,10 @@ public class ChordInput {
     addToMapping(mapping, KeyEvent.VK_SPACE, ' ', R1, L1);
     addToMapping(mapping, KeyEvent.VK_PERIOD, '.', R3, R4, L3);
 
+    // Flaky
+    addToMapping(mapping, KeyEvent.VK_ENTER, '\n', R1, R2, R3, R4);
+    addToMapping(mapping, KeyEvent.VK_DELETE, NONE, R1, R2, R3, L1);
+
     addToMapping(mapping, KeyEvent.VK_E, 'e', R1);
     addToMapping(mapping, KeyEvent.VK_T, 't', L1);
     addToMapping(mapping, KeyEvent.VK_A, 'a', R2);
@@ -100,9 +104,6 @@ public class ChordInput {
     addToMapping(mapping, KeyEvent.VK_7, '7', R1, R3, L1);
     addToMapping(mapping, KeyEvent.VK_8, '8', R2, L2, L3);
     addToMapping(mapping, KeyEvent.VK_9, '9', R2, R3, L2);
-
-    addToMapping(mapping, KeyEvent.VK_DELETE, NONE, KeyEvent.VK_DELETE);
-    addToMapping(mapping, KeyEvent.VK_BACK_SPACE, NONE, KeyEvent.VK_BACK_SPACE);
 
     return mapping;
   }
