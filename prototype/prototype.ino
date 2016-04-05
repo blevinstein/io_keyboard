@@ -1,3 +1,7 @@
+bool pressed[8] = {false, false, false, false, false, false, false, false};
+bool state[8] = {false, false, false, false, false, false, false, false};
+struct ChordInput *chordInput;
+
 void setup() {
   pinMode(A0, INPUT);
   pinMode(A1, INPUT);
@@ -11,24 +15,25 @@ void setup() {
   for (i = 4; i < 12; i++) {
     pinMode(i, OUTPUT);
   }
+  chordInput = newChordInput(&alertKey);
   Serial.begin(9600);
 }
 
-bool pressed[8] = {false, false, false, false, false, false, false, false};
-bool state[8] = {false, false, false, false, false, false, false, false};
-
 void keyPressed(int i) {
   state[i] = true;
-  setBuzzer(i, HIGH);
-  Serial.print("keyPressed ");
-  Serial.println(i);
+  chordKeyPressed(chordInput, i);
 }
 
 void keyReleased(int i) {
   state[i] = false;
-  setBuzzer(i, LOW);
-  Serial.print("keyReleased ");
-  Serial.println(i);
+  chordKeyReleased(chordInput, i);
+}
+
+void alertKey(char c) {
+  Serial.print(c);
+  if (c == '\n') {
+    buzzString((char*)"Hello world.", 400, 100);
+  }
 }
 
 void loop() {
@@ -39,6 +44,31 @@ void loop() {
       keyReleased(i);
     } else if (!state[i] && now) {
       keyPressed(i);
+    }
+  }
+}
+
+void buzzString(char *str, int on, int off) {
+  int i = 0;
+  while (str[i]) {
+    buzzCharacter(str[i], on);
+    delay(off);
+    i++;
+  }
+}
+
+void buzzCharacter(char ch, int mill) {
+  int inputValue = reverseLookup(chordInput, ch);
+  if (inputValue) {
+    int i;
+    for (i = 0; i < 8; i++) {
+      if (1 << (7 - i) & inputValue) {
+        setBuzzer(i, HIGH);
+      }
+    }
+    delay(mill);
+    for (i = 0; i < 8; i++) {
+      setBuzzer(i, LOW);
     }
   }
 }
