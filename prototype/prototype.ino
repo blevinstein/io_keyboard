@@ -15,6 +15,7 @@ void setup() {
   for (i = 4; i < 12; i++) {
     pinMode(i, OUTPUT);
   }
+  // TODO: Instead of printing each char to serial, add to a buffer, and print whole buffer
   chordInput = newChordInput(&alertKey);
   Serial.begin(9600);
 }

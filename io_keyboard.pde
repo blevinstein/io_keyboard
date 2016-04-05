@@ -60,24 +60,44 @@ void setup() {
   surface.setResizable(true);
 
   try {
-    /*
-    HashSet practiceChars = new HashSet();
-    practiceChars.add('a');
-    practiceChars.add('e');
-    practiceChars.add('i');
-    practiceChars.add('o');
-    practiceChars.add('u');
-    practiceChars.add('t');
-    practiceChars.add('n');
-    practiceChars.add('s');
-    practiceWords = Words.getPracticeWords(practiceChars);
-    */
-    practiceWords = Words.getAllWords();
+    HashSet leftHandLetters = new HashSet();
+    leftHandLetters.add('r');
+    leftHandLetters.add('n');
+    leftHandLetters.add('o');
+    leftHandLetters.add('t');
+    leftHandLetters.add('l');
+    leftHandLetters.add('u');
+    HashSet rightHandLetters = new HashSet();
+    rightHandLetters.add('e');
+    rightHandLetters.add('a');
+    rightHandLetters.add('i');
+    rightHandLetters.add('s');
+    rightHandLetters.add('h');
+    rightHandLetters.add('d');
+    rightHandLetters.add('c');
+    rightHandLetters.add('w');
+    rightHandLetters.add('m');
+    HashSet bothHandLetters = new HashSet();
+    bothHandLetters.add('f');
+    bothHandLetters.add('g');
+    bothHandLetters.add('y');
+    bothHandLetters.add('p');
+    bothHandLetters.add('b');
+    bothHandLetters.add('v');
+    bothHandLetters.add('k');
+    bothHandLetters.add('j');
+    bothHandLetters.add('x');
+    bothHandLetters.add('q');
+    bothHandLetters.add('z');
+    practiceWords = Words.getPracticeWords(bothHandLetters);
+    //practiceWords = Words.getPracticeWords(rightHandLetters);
+    //practiceWords = Words.getPracticeWords(leftHandLetters);
+    //practiceWords = Words.getAllWords();
   } catch (FileNotFoundException e) {
     throw new RuntimeException(e);
   }
   // add some numbers as well, skewed towards smaller numbers
-  for (int i = 0; i < 100000; i++) {
+  for (int i = 0; i < practiceWords.size() / 3; i++) {
     practiceWords.add("" + round(exp(i / 10000)));
   }
 }
