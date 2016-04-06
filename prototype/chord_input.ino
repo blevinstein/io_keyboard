@@ -75,6 +75,7 @@ struct ChordInput *newChordInput(void callback(char)) {
   chordInput->mapping[R4 | L3 | L4] = 'Z';
 
   chordInput->mapping[R1 | R2 | R3 | R4] = '\n';
+  chordInput->mapping[R1  | R2 | R3 | L1] = '\b';
   chordInput->mapping[R1 | L1] = ' ';
   chordInput->mapping[R3 | R4 | L3] = '.';
 

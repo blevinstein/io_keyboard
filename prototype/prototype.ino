@@ -1,6 +1,7 @@
 bool pressed[8] = {false, false, false, false, false, false, false, false};
 bool state[8] = {false, false, false, false, false, false, false, false};
 struct ChordInput *chordInput;
+String buffer = "";
 
 void setup() {
   pinMode(A0, INPUT);
@@ -33,10 +34,14 @@ void keyReleased(int i) {
 }
 
 void alertKey(char c) {
-  Serial.print(c);
   if (c == '\n') {
-    buzzString((char*)"Hello world.", 400, 100);
+    buffer = "";
+  } else if (c == '\b') {
+    buffer = buffer.substring(0, buffer.length() - 1);
+  } else {
+    buffer += c;
   }
+  Serial.println(buffer + "_");
 }
 
 void loop() {
@@ -49,9 +54,12 @@ void loop() {
       keyPressed(i);
     }
   }
+  if (Serial.available() > 0) {
+    buzzString(Serial.readString().c_str(), 800, 200);
+  }
 }
 
-void buzzString(char *str, int on, int off) {
+void buzzString(const char *str, int on, int off) {
   int i = 0;
   while (str[i]) {
     buzzCharacter(str[i], on);
