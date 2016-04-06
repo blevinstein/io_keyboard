@@ -1,3 +1,5 @@
+import processing.serial.*;
+
 import java.io.FileNotFoundException;
 import java.util.function.BiConsumer;
 import java.util.HashSet;
@@ -17,6 +19,8 @@ int lastInputMillis = 0;
 boolean showHelp = false;
 List<String> practiceWords = new ArrayList();
 Random random = new Random();
+Serial port;
+String serialBuffer = "";
 
 // This is an abstraction to combine multiple keystrokes into a single output.
 ChordInput chordInput = new ChordInput(new BiConsumer<Integer, Character>() {
@@ -59,6 +63,13 @@ void settings() {
 void setup() {
   surface.setResizable(true);
 
+  printArray(Serial.list());
+  try {
+    port = new Serial(this, Serial.list()[2], 9600);
+  } catch (Exception e) {
+    System.err.println("Failed to connect Serial port");
+  }
+
   try {
     HashSet leftHandLetters = new HashSet();
     leftHandLetters.add('r');
@@ -79,7 +90,8 @@ void setup() {
     rightHandLetters.add('m');
     //practiceWords = Words.getPracticeWords(rightHandLetters);
     //practiceWords = Words.getPracticeWords(leftHandLetters);
-    practiceWords = Words.getAllWords();
+    //practiceWords = Words.getAllWords();
+    practiceWords = Words.getEasyWords(8);
   } catch (FileNotFoundException e) {
     throw new RuntimeException(e);
   }
@@ -93,6 +105,9 @@ void setup() {
 void nextWord() {
   goal = practiceWords.get(random.nextInt(practiceWords.size()));
   text = "";
+  if (port != null) {
+    port.write(goal);
+  }
 }
 
 void draw() {
@@ -110,10 +125,29 @@ void draw() {
   text(goal, 0, 15);
   text(text + "_", 0, 35);
 
-  int i = 0;
-  while (i < goal.length() && i < text.length() && goal.charAt(i) == text.charAt(i)) i++;
+  int nextIndex = 0;
+  while (nextIndex < goal.length()
+      && nextIndex < text.length()
+      && goal.charAt(nextIndex) == text.charAt(nextIndex)) nextIndex++;
   if (showHelp || millis() - lastInputMillis > DELAY) {
-    drawKey(goal.charAt(i));
+    drawKey(goal.charAt(nextIndex));
+  }
+
+  if (port.available() > 0) {
+    String inputString = port.readString();
+    serialBuffer += inputString;
+    while (serialBuffer.indexOf("\n") >= 0) {
+      int newline = serialBuffer.indexOf("\n");
+      if (newline > 0 && serialBuffer.charAt(newline - 2) == '_') {
+        text = serialBuffer.substring(0, newline - 2);
+        lastInputMillis = millis();
+        showHelp = false;
+      } else {
+        System.err.println(
+            String.format("Invalid line: '%s'", serialBuffer.substring(0, newline - 2)));
+      }
+      serialBuffer = serialBuffer.substring(newline + 1);
+    }
   }
 }
 

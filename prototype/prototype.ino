@@ -55,7 +55,8 @@ void loop() {
     }
   }
   if (Serial.available() > 0) {
-    buzzString(Serial.readString().c_str(), 800, 200);
+    buzzString(Serial.readString().c_str(), 1000, 200);
+    buffer = "";
   }
 }
 

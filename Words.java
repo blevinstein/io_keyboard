@@ -8,7 +8,7 @@ import java.util.Set;
 
 public class Words {
   private static File DICT_FILE = new File("/usr/share/dict/words");
-  
+
   public static List<String> getAllWords() throws FileNotFoundException {
     Scanner scanner = new Scanner(DICT_FILE);
     ArrayList<String> allWords = new ArrayList<>();
@@ -17,7 +17,7 @@ public class Words {
     }
     return allWords;
   }
-  
+
   public static List<String> getPracticeWords(Set<Character> characters)
       throws FileNotFoundException {
     List<String> allWords = getAllWords();
@@ -30,6 +30,17 @@ public class Words {
         }
       }
       if (canPractice) {
+        practiceWords.add(word);
+      }
+    }
+    return practiceWords;
+  }
+
+  public static List<String> getEasyWords(int maxLength) throws FileNotFoundException {
+    List<String> allWords = getAllWords();
+    List<String> practiceWords = new ArrayList<>();
+    for (String word : allWords) {
+      if (word.length() <= maxLength) {
         practiceWords.add(word);
       }
     }
