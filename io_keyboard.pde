@@ -122,8 +122,8 @@ void draw() {
   fill(255);
   textAlign(LEFT);
   textSize(20);
-  text(goal, 0, 15);
-  text(text + "_", 0, 35);
+  text(goal, 50 + 0, 50 + 15);
+  text(text + "_", 50 + 0, 50 + 35);
 
   int nextIndex = 0;
   while (nextIndex < goal.length()
